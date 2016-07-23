@@ -412,6 +412,9 @@ module Rongcloud
     end
 
     def be_symbolized(res)
+      if res.is_a? Hash
+        res = res[:msg]
+      end
       begin
         res_hash = JSON.parse res
         res_hash = res_hash.kind_of?(Array) ? res_hash.map(&:deep_symbolize_keys!) : res_hash.deep_symbolize_keys!
