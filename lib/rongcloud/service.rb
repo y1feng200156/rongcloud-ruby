@@ -341,6 +341,48 @@ module Rongcloud
       be_symbolized res
     end
 
+    # 添加禁言成员
+    def add_gag_group_user(user_id, group_id, minute)
+      url = "#{@host}/group/user/gag/add.json"
+      params = {userId: user_id, groupId: group_id, minute: minute}
+      begin
+        res = RestClient.post url, params, @sign_header
+      rescue => e
+        $logger.warn "#{Time.now} gag_group_user exception is #{e}"
+        res = e.response.inspect
+      end
+      $logger.warn "#{Time.now} gag_group_user response is #{res}"
+      be_symbolized res
+    end
+
+    # 移除禁言成员
+    def remove_gag_group_user(user_id, group_id)
+      url = "#{@host}/group/user/gag/rollback.json"
+      params = {userId: user_id, groupId: group_id}
+      begin
+        res = RestClient.post url, params, @sign_header
+      rescue => e
+        $logger.warn "#{Time.now} remove_gag_group_user exception is #{e}"
+        res = e.response.inspect
+      end
+      $logger.warn "#{Time.now} remove_gag_group_user response is #{res}"
+      be_symbolized res
+    end
+
+    # 查询被禁言成员
+    def gag_group_users(group_id)
+      url = "#{@host}/group/user/gag/list.json"
+      params = { groupId: group_id}
+      begin
+        res = RestClient.post url, params, @sign_header
+      rescue => e
+        $logger.warn "#{Time.now} gag_group_users exception is #{e}"
+        res = e.response.inspect
+      end
+      $logger.warn "#{Time.now} gag_group_users response is #{res}"
+      be_symbolized res
+    end
+
     ## 聊天室服务
     # 创建聊天室
     # {id: name, id: name}
