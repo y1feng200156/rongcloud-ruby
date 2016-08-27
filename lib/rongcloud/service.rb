@@ -506,6 +506,11 @@ module Rongcloud
       @stream.seek(0)
     end
 
+    # for Multipart do not escape the keys
+    def handle_key key
+      key
+    end
+
     def http_status
       {
           200 => '成功 => 成功',
