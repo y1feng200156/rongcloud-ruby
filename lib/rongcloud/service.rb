@@ -165,11 +165,11 @@ module Rongcloud
     end
 
     # 发送群组消息
-    def send_group_msg(from_uid, to_uid, msg_type, content, push_content = nil, push_data = nil)
+    def send_group_msg(from_uid, to_group_id, msg_type, content, push_content = nil, push_data = nil)
       url = "#{@host}/message/group/publish.json"
       params = {
         fromUserId: from_uid,
-        toUserId: to_uid,
+        toGroupId: to_group_id,
         objectName: msg_type,
         content: content.to_json
       }
