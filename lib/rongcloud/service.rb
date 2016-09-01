@@ -307,7 +307,7 @@ module Rongcloud
       url = "#{@host}/group/quit.json"
       params = {userId: user_id, groupId: group_id}
       begin
-        res = RestClient.post url, params, @sign_header
+        res = RestClient.post url, build_stream(params), @sign_header
       rescue => e
         res = e.response.inspect
       end
