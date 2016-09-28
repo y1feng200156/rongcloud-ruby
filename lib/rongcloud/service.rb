@@ -129,7 +129,7 @@ module Rongcloud
       params.merge!({pushContent: push_content}) unless push_content.nil?
       params.merge!({pushData: push_data}) unless push_data.nil?
       params.merge!({count: count}) unless count.nil?
-      res = RestClient.post url, params, @sign_header
+      res = RestClient.post url, build_stream(params), @sign_header
       be_symbolized res
     end
 
@@ -161,7 +161,7 @@ module Rongcloud
       }
       params.merge!({pushContent: push_content}) unless push_content.nil?
       params.merge!({pushData: push_data}) unless push_data.nil?
-      res = RestClient.post url, params, @sign_header
+      res = RestClient.post url, build_stream(params), @sign_header
       be_symbolized res
     end
 
